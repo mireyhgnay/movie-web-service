@@ -34,3 +34,64 @@ React는 이미 알고있다!!
 모든 업데이트가 끝나면 일괄로 합쳐서 실제 돔에 던져준다고 합니다.
 
 프론트엔드는 렌더 트리 단계를 얼마나 최적화 하는가가 중요하다!!
+
+<br>
+
+### STATE
+
+- state는 기본적으롤 데이터가 저장되는 곳
+
+<br>
+
+아래 코드를 실행하고 버튼을 클릭해서 countUp 함수가 실행은 되서 count가 증가는 하지만,  
+UI에 렌더 되지 않는다. 정확히는 재렌더링!
+
+왜냐면 맨처음 브라우저가 render 된 후, 재렌더해라! 라는 코드가 없다.  
+클릭 후, Container 가 재렌더되서 UI가 업데이트 되어야한다.
+
+```jsx
+let counter = 0;
+function countUp() {
+  counter += 1;
+}
+
+const Container = () => (
+  <div>
+    <h3>Total clicks: {couter}</h3>
+    <button onClick={countUp}>Click Me!</button>
+  </div>
+);
+
+ReactDOM.render(<Container />, root); // 맨처음 렌더 이후, 함수를 실행한 후에 업데이트한 내용을 재렌더 하라는 코드가 없음
+```
+
+<br>
+
+우리가 의도한대로 counter 가 증가하기 위해 재렌더를 위해서는 아래 코드 로직으로 구현되어야 한다!
+
+```jsx
+let counter = 0;
+function countUp() {
+  counter += 1;
+  render(); // 함수 실행 후, Container 재렌더
+}
+
+function render() {
+  ReactDOM.render(<Container />, root);
+}
+
+const Container = () => (
+  <div>
+    <h3>Total clicks: {couter}</h3>
+    <button onClick={countUp}>Click Me!</button>
+  </div>
+);
+
+render(); // 맨처음 로드될 때 render
+```
+
+1. 우리가 처음 브라우저에 렌더링 할때는 counter 0
+2. 버튼 클릭해 함수 호출
+3. 전체가 다시 리렌더
+
+### 우리가 값을 바꿀때마다 재렌더 되어야 한다는 것을 잊으면 안돼~~
