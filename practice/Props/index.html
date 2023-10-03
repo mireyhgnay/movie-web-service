@@ -8,12 +8,13 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    function Button({ text, onClick }) {
+    function Button({ text, onClick, fontSize = 16 }) {
       return (
         <button
           type="button"
@@ -24,22 +25,29 @@
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: 16,
+            fontSize,
           }}
         >
           {text}
         </button>
       );
     }
+
+    Button.propTypes = {
+      // 타입에 맞지 않게 props 설정 시, 콘솔에러가 난다. 화면상의 오류는 없다.
+      text: PropTypes.string.isRequired, // isRequired는 필수로 설정해야하는 값이다. 라는 의미
+      fontSize: PropTypes.number,
+    };
+
     function App() {
       const [value, setValue] = React.useState("Save Changes");
       const changeValue = () => setValue("Revert Changes");
-      const MemorizeBtn = React.memo(Btn); // 첫 렌더링만 실행되고, state가 없데이트 되는 컴포넌트만 리렌더링 된다.
+      const MemorizeBtn = React.memo(Button); // 첫 렌더링만 실행되고, state가 없데이트 되는 컴포넌트만 리렌더링 된다.
 
       return (
         <div>
           {/* 커스텀 컴포넌트에 onChange를 추가한다고 이벤트 리스너가 추가되게 아니다! */}
-          <Button text={value} onClick={changeValue} />
+          <Button text={value} onClick={changeValue} fontSize={18} />
           <Button text="Continue" />
         </div>
       );
