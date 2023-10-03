@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unit Conversion</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    function App() {
+      let [minutes, setMinutes] = React.useState();
+
+      const onChange = (e) => {
+        setMinutes(e.target.value);
+      };
+
+      return (
+        <div>
+          <h1 className="title">Super Converter</h1>
+
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            type="number"
+            placeholder="minutes"
+            onChange={onChange}
+          />
+          <h3>{minutes}</h3>
+
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" type="number" placeholder="hours" />
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
