@@ -14,14 +14,20 @@
 
   <script type="text/babel">
     function App() {
-      let [minutes, setMinutes] = React.useState(0);
+      let [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
 
       const onChange = (e) => {
-        setMinutes(e.target.value);
+        setAmount(e.target.value);
       };
 
-      const onClick = (e) => {
-        setMinutes(0);
+      const reset = (e) => {
+        setAmount(0);
+      };
+
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
       };
 
       return (
@@ -31,11 +37,12 @@
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={minutes} // value만 리렌더링 된다.
+              value={flipped ? amount * 60 : amount} // value만 리렌더링 된다.
               id="minutes"
               type="number"
               placeholder="minutes"
               onChange={onChange}
+              disabled={flipped}
             />
           </div>
 
@@ -44,17 +51,21 @@
           <div>
             <label htmlFor="hours">Hours</label>
             <input
-              value={Math.round(minutes / 60)}
+              value={flipped ? amount : Math.round(amount / 60)}
               id="hours"
               type="number"
               placeholder="hours"
               // Hours에는 onChange 이벤트가 없기 때문에 업데이트되서 재렌더링 되지 않는다.
-              disabled
+              disabled={!flipped}
+              onChange={onChange}
             />
           </div>
 
-          <button type="button" onClick={onClick}>
+          <button type="button" onClick={reset}>
             Reset
+          </button>
+          <button type="button" onClick={onFlip}>
+            Flipped
           </button>
         </div>
       );
