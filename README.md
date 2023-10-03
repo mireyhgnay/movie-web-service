@@ -185,3 +185,90 @@ setCounter 함수가 counter 값을 업데이트 해주고 리렌더링까지 �
 렌더링된 브라우저에서는 HTML 코드로 표시된다.
 
 <br>
+
+### Props
+
+props는 부모 컴포넌트로부터 자식 컴포넌트에 데이터를 보낼 수 있게 해주는 방법이다.
+
+```jsx
+// 생략...
+function App() {
+  // 생략...
+
+  return (
+    <div>
+      <h1>Super Converter</h1>
+      <select value={index} onChange={onSelect}>
+        <option value="-1">Select...</option>
+        <option value="0">Minutes To Hours</option>
+        <option value="1">Km To Miles</option>
+      </select>
+
+      <br />
+
+      {index === "0" ? <MinutesToHours /> : null}
+      {index === "1" ? <KmToMiles /> : null}
+    </div>
+  );
+}
+```
+
+App컴포넌트가 부모 컴포넌트이고, MinutesToHours와 KmToMiles 컴포넌트가 자식 컴포넌트 이다.
+
+<br>
+
+### props 사용하기
+
+```jsx
+function Button(props) {
+  return (
+    <button
+      type="button"
+      style={{
+        fontSize: props.big ? 18 : 16,
+      }}
+    >
+      {props.text}
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Button text="Save Change" big={true} />
+      <Button text="Continue" big={false} />
+    </div>
+  );
+}
+```
+
+text와 big 이란 props를 받아와 재사용하여 사용한다.
+
+<br>
+
+더 편리하게 사용하기 위해서는 아래처럼 사용하면 된다.
+
+```jsx
+function Button({ text, big }) {
+  return (
+    <button
+      type="button"
+      style={{
+        fontSize: big ? 18 : 16,
+      }}
+    >
+      {text}
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Button text="Save Change" big={true} />
+      <Button text="Continue" big={false} />
+    </div>
+  );
+}
+```
