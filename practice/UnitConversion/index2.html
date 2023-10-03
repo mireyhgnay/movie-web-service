@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unit Conversion</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    function MinutesToHours() {
+      let [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+
+      const onChange = (e) => {
+        setAmount(e.target.value);
+      };
+
+      const reset = (e) => {
+        setAmount(0);
+      };
+
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+
+      return (
+        <div>
+          <h2 className="title">Minutes 👉 Hours 변환하기</h2>
+
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={flipped ? amount * 60 : amount} // value만 리렌더링 된다.
+              id="minutes"
+              type="number"
+              placeholder="minutes"
+              onChange={onChange}
+              disabled={flipped}
+            />
+          </div>
+
+          <br />
+
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={flipped ? amount : Math.round(amount / 60)}
+              id="hours"
+              type="number"
+              placeholder="hours"
+              // Hours에는 onChange 이벤트가 없기 때문에 업데이트되서 재렌더링 되지 않는다.
+              disabled={!flipped}
+              onChange={onChange}
+            />
+          </div>
+
+          <button type="button" onClick={reset}>
+            Reset
+          </button>
+          <button type="button" onClick={onFlip}>
+            Flipped
+          </button>
+        </div>
+      );
+    }
+    function KmToMiles() {
+      let [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+
+      const onChange = (e) => {
+        setAmount(e.target.value);
+      };
+
+      const reset = (e) => {
+        setAmount(0);
+      };
+
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+
+      return (
+        <div>
+          <h2 className="title">KM 👉 Miles 변환하기</h2>
+
+          <div>
+            <label htmlFor="minutes">KM</label>
+            <input
+              value={flipped ? amount * 60 : amount} // value만 리렌더링 된다.
+              id="minutes"
+              type="number"
+              placeholder="KM"
+              onChange={onChange}
+              disabled={flipped}
+            />
+          </div>
+
+          <br />
+
+          <div>
+            <label htmlFor="hours">Miles</label>
+            <input
+              value={flipped ? amount : Math.round(amount / 60)}
+              id="hours"
+              type="number"
+              placeholder="Miles"
+              // Hours에는 onChange 이벤트가 없기 때문에 업데이트되서 재렌더링 되지 않는다.
+              disabled={!flipped}
+              onChange={onChange}
+            />
+          </div>
+
+          <button type="button" onClick={reset}>
+            Reset
+          </button>
+          <button type="button" onClick={onFlip}>
+            Flipped
+          </button>
+        </div>
+      );
+    }
+    function App() {
+      const [index, setIndex] = React.useState("-1");
+
+      const onSelect = (e) => {
+        setIndex(e.target.value);
+      };
+
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="-1">Select...</option>
+            <option value="0">Minutes To Hours</option>
+            <option value="1">Km To Miles</option>
+          </select>
+
+          <br />
+
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
