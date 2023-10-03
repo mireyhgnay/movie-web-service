@@ -1,7 +1,33 @@
 # ReactJS 영화 웹 서비스 만들기
 
-```bash
-npm run start
+<br>
 
-npm start
+### useEffect
+
+컴포넌트가 처음 딱 한번만 render 할 때 실행되고, 이후 State가 변경되더라도 그 코드가 실행되지 않도록 한다.
+
+<br>
+
+**사용 방법**
+
+```jsx
+import { useEffect } from "react";
+
+function App() {
+  console.log("I run all the time");
+  };
+
+  useEffect(() => {
+    console.log("I run only once");
+  }, []);
+
+  return <div></div>;
+}
+
+export default App;
 ```
+
+useEffect 첫 인자로 준 함수는 첫 렌더링때만 실행되고, 이후 재렌더링 되는 순간에도 출력되지 않는다.
+
+- [] : 빈 배열은 첫 렌더링 될 때만 실행된다.
+- [keyword] : 배열 안에 있는 값이 변경될 때만 실행된다.
