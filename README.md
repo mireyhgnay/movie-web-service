@@ -94,4 +94,50 @@ render(); // 맨처음 로드될 때 render
 2. 버튼 클릭해 함수 호출
 3. 전체가 다시 리렌더
 
-### 우리가 값을 바꿀때마다 재렌더 되어야 한다는 것을 잊으면 안돼~~
+#### 우리가 값을 바꿀때마다 재렌더 되어야 한다는 것을 잊으면 안돼~~
+
+<br>
+
+### 데이터를 저장했다가 컴포넌트를 재렌더링하기 :: `useState()`
+
+컴포넌트 업데이트할 때마다 App 컴포넌트를 계속 재렌더링 하는건 비효율적이니!
+
+```jsx
+const data = React.useState();
+console.log(data);
+
+// result : [undefined, function]
+```
+
+결과로 찍히는 배열에 첫번째 요소는 담고있는 데이터이고,
+
+두번째 요소에 있는 이 함수는 data를 바꿀 때 사용하는 함수이다.
+
+<br>
+
+```jsx
+const counter = data[0]; // data
+function countUp() {
+  // 두번쨰 요소 function
+  // code
+}
+```
+
+<br>
+
+위에서 쓴 것 처럼 함수와 초기값 변수를 각각 쓰는 것보다 더 효율적으로 쓰기 위해서 아래처럼 써야한다.
+
+```jsx
+const food = ["tomato", "banana"];
+
+// 아래처럼 쓰는 것 보다는?
+const myFavFood = food[0];
+const mySecondFavFood = food[1];
+
+// 이렇게 분해해서 쓰는 것이 효율적! useState 도 같은 방식
+const [myFavFood, mySecondFavFood] = food;
+```
+
+아무튼 중요한건?
+
+#### useState()의 배열 첫번째 요소는 담고있는 Data, 두번째 요소는 함수가 담기는데 앞 Data 를 바꿀 때 사용하는 함수이다!!
