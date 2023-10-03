@@ -10,6 +10,15 @@ function App() {
   useEffect(() => {
     console.log("SEARCH FOR", keyword);
   }, [keyword]);
+
+  useEffect(() => {
+    console.log("첫 렌더링 때 실행된다!");
+    return function () {
+      // return 이후 실행시키면, 파괴될 때 실행되는 것
+      console.log("컴포넌트가 사라질 때 실행된다!");
+    };
+  }, []);
+
   return (
     <div>
       <input

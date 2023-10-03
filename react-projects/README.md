@@ -31,3 +31,21 @@ useEffect 첫 인자로 준 함수는 첫 렌더링때만 실행되고, 이후 �
 
 - [] : 빈 배열은 첫 렌더링 될 때만 실행된다.
 - [keyword] : 배열 안에 있는 값이 변경될 때만 실행된다.
+
+<br>
+
+### useEffect :: Cleanup Function
+
+```jsx
+useEffect(() => {
+  console.log("첫 렌더링 때 실행된다!");
+  return function () {
+    // return 이후 실행시키면, 파괴될 때 실행되는 것
+    console.log("컴포넌트가 사라질 때 실행된다!");
+  };
+}, []);
+```
+
+return 이후 실행되는 함수는 컴포넌트가 사라질 때 실행되는 함수이다.
+
+useEffect를 잘 이해하고 사용해야한드아!!
