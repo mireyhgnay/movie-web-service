@@ -14,28 +14,48 @@
 
   <script type="text/babel">
     function App() {
-      let [minutes, setMinutes] = React.useState();
+      let [minutes, setMinutes] = React.useState(0);
 
       const onChange = (e) => {
         setMinutes(e.target.value);
       };
 
+      const onClick = (e) => {
+        setMinutes(0);
+      };
+
       return (
         <div>
-          <h1 className="title">Super Converter</h1>
+          <h1 className="title">Minutes 👉 Hours 변환하기</h1>
 
-          <label htmlFor="minutes">Minutes</label>
-          <input
-            value={minutes}
-            id="minutes"
-            type="number"
-            placeholder="minutes"
-            onChange={onChange}
-          />
-          <h3>{minutes}</h3>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={minutes} // value만 리렌더링 된다.
+              id="minutes"
+              type="number"
+              placeholder="minutes"
+              onChange={onChange}
+            />
+          </div>
 
-          <label htmlFor="hours">Hours</label>
-          <input id="hours" type="number" placeholder="hours" />
+          <br />
+
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={Math.round(minutes / 60)}
+              id="hours"
+              type="number"
+              placeholder="hours"
+              // Hours에는 onChange 이벤트가 없기 때문에 업데이트되서 재렌더링 되지 않는다.
+              disabled
+            />
+          </div>
+
+          <button type="button" onClick={onClick}>
+            Reset
+          </button>
         </div>
       );
     }

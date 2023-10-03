@@ -174,3 +174,14 @@ const onClick = () => {
 setCounter 함수가 counter 값을 업데이트 해주고 리렌더링까지 모두 해결해주는 것이다.
 
 업데이트 되어야 할 함수마다 계속 리렌더링 되는 코드를 넣어주지 않아도 되는 것이다!!
+
+<br>
+
+### JSX VS HTML
+
+- class(HTML) 👉 className(JSX)
+- for(HTML) 👉 htmlFor(JSX)
+
+렌더링된 브라우저에서는 HTML 코드로 표시된다.
+
+<br>
