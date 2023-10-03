@@ -13,17 +13,18 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    function Button({ text, big }) {
+    function Button({ text, onClick }) {
       return (
         <button
           type="button"
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: big ? 18 : 16,
+            fontSize: 16,
           }}
         >
           {text}
@@ -31,10 +32,13 @@
       );
     }
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <Button text="Save Change" big={true} />
-          <Button text="Continue" big={false} />
+          {/* 커스텀 컴포넌트에 onChange를 추가한다고 이벤트 리스너가 추가되게 아니다! */}
+          <Button text={value} onClick={changeValue} />
+          <Button text="Continue" />
         </div>
       );
     }

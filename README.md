@@ -272,3 +272,51 @@ function App() {
   );
 }
 ```
+
+<br>
+
+### 커스텀 컴포넌트에 이벤트리스너는 추가되지 않는다. 그저 props일 뿐!!!
+
+아래 코드처럼 커스텀 컴포넌트 <Button /> 에만 onClick 을 추가해준다고 이벤트리스너가 추가되어 동작되지 않는다.  
+그저 props 인 것!!  
+실제 Button 컴포넌트에 등록해주어야 한다.
+
+```jsx
+function Button({ text }) {
+  return <button>{text}</button>;
+}
+function App() {
+  const [value, setValue] = React.useState("Save Changes");
+  const changeValue = () => setValue("Revert Changes");
+  return (
+    <div>
+      {/* 커스텀 컴포넌트에 onChange를 추가한다고 이벤트 리스너가 추가되게 아니다! */}
+      <Button text={value} onClick={changeValue} />
+      <Button text="Continue" />
+    </div>
+  );
+}
+```
+
+<br>
+
+실제 컴포넌트에 넣어주었을 때 동작!!!
+
+```jsx
+function Button({ text, onClick }) {
+  return <button onClick={onClick}>{text}</button>;
+}
+function App() {
+  const [value, setValue] = React.useState("Save Changes");
+  const changeValue = () => setValue("Revert Changes");
+  return (
+    <div>
+      {/* 커스텀 컴포넌트에 onChange를 추가한다고 이벤트 리스너가 추가되게 아니다! */}
+      <Button text={value} onClick={changeValue} />
+      <Button text="Continue" />
+    </div>
+  );
+}
+```
+
+<br>
