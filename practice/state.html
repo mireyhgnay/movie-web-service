@@ -16,12 +16,20 @@
     const root = document.getElementById("root");
 
     function App() {
-      const [counter, modifier] = React.useState(0);
+      let [counter, setCounter] = React.useState(0);
+
+      // setCounter 함수는 값을 하나 받는다.
+      // 어떤 값을 부여하면 함수는 그 값으로 업데이트를 하고, 리렌더링까지 일으킨다.
+      const onClick = () => {
+        setCounter(counter + 1);
+      };
 
       return (
         <div>
           <h3 class="title">Total Clicks : {counter}</h3>
-          <button onClick={countUp}>Click Me!</button>
+          <button type="button" onClick={onClick}>
+            Click Me!
+          </button>
         </div>
       );
     }

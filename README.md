@@ -141,3 +141,36 @@ const [myFavFood, mySecondFavFood] = food;
 아무튼 중요한건?
 
 #### useState()의 배열 첫번째 요소는 담고있는 Data, 두번째 요소는 함수가 담기는데 앞 Data 를 바꿀 때 사용하는 함수이다!!
+
+<br>
+
+### setCounter로 업데이트 + 리렌더링까지 모두 해결하기!
+
+counter를 업데이트 해야할 때 setCounter 함수를 쓴다.
+
+```jsx
+// counter는 담고있는 데이터, setCounter는 데이터를 업데이트 하는 함수
+const [counter, setCounter] = React.useState(0);
+
+const onClick = () => {
+  setCounter(12345);
+};
+```
+
+<br>
+
+위의 setCounter 함수는 아래와 같이 동작한다.
+
+```jsx
+const [counter, setCounter] = React.useState(0);
+
+const onClick = () => {
+  // 1. setCounter 함수는 값을 하나 받는다 (12345 란 값을 받음)
+  counter = 12345; // 2. 함수는 counter의 값을 업데이트 한다
+  ReactDOM.render(<App />, root); // 3. 컴포넌트를 리렌더링 한다
+};
+```
+
+setCounter 함수가 counter 값을 업데이트 해주고 리렌더링까지 모두 해결해주는 것이다.
+
+업데이트 되어야 할 함수마다 계속 리렌더링 되는 코드를 넣어주지 않아도 되는 것이다!!
