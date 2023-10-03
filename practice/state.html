@@ -21,7 +21,7 @@
       // setCounter 함수는 값을 하나 받는다.
       // 어떤 값을 부여하면 함수는 그 값으로 업데이트를 하고, 리렌더링까지 일으킨다.
       const onClick = () => {
-        setCounter(counter + 1);
+        setCounter((current) => current + 1);
       };
 
       return (
