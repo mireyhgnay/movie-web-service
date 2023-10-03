@@ -34,6 +34,8 @@
     function App() {
       const [value, setValue] = React.useState("Save Changes");
       const changeValue = () => setValue("Revert Changes");
+      const MemorizeBtn = React.memo(Btn); // 첫 렌더링만 실행되고, state가 없데이트 되는 컴포넌트만 리렌더링 된다.
+
       return (
         <div>
           {/* 커스텀 컴포넌트에 onChange를 추가한다고 이벤트 리스너가 추가되게 아니다! */}

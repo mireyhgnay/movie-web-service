@@ -320,3 +320,15 @@ function App() {
 ```
 
 <br>
+
+### React.memo
+
+App컴포넌트 안에서 state가 업데이트 되기 떄문에 App 컴포넌트의 자식요소들까지 리렌더링 된다.
+
+props가 변경되지 않는 Continue Button 까지 리렌더링 되는 것이다.
+
+만약 App컴포넌트 안에 자식요소들이 1000개 넘는다고 가정해본다면 엄청 렌더링이 느려질 것임!
+
+props 변경이 없는 Continue Button은 리렌더링 되지 않기 위해서는 React.memo를 사용해야하는 것이다~
+
+React.memo는 처음에만 렌더링 되고, 그 이후 상태 업데이트 내용이 없으면 리렌더링 되지 않음!!
