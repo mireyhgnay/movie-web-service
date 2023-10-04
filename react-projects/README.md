@@ -166,3 +166,11 @@ array.map((item) => item.toUpperCase());
 console.log(array);
 // result : ["A", "B", "C", "D"]
 ```
+
+<br>
+
+### React Router
+
+```bash
+npm install react-router-dom
+```
