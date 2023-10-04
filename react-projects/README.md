@@ -56,4 +56,113 @@ useEffect를 잘 이해하고 사용해야한돠!!
 
 <br>
 
-###
+> useEffect, useState, Props 를 만들어보면서 계속 연습한다.  
+> 아래 내용은 노마드코더 7강 내용
+
+### useState :: toDo 와 setToDo 는!
+
+toDo 를 직접 사용해서 변경하지 않고,
+
+우리는 함수(setToDo)를 사용하고 그 함수는 toDo를 수정하는 역할을 하는 것!
+
+```jsx
+const [toDo, setToDo] = useState("");
+
+const onSubmit = (e) => {
+  e.preventDefault();
+  setToDo("");
+};
+```
+
+위에 처럼 setTodo('') 함수를 사용해서 빈 값으로 변경해주는 것이다.
+
+<br>
+
+```jsx
+const [toDo, setToDo] = useState("");
+
+const onSubmit = (e) => {
+  e.preventDefault();
+  toDo = "";
+};
+```
+
+위에처럼 toDo 값을 직접 변경해주면 안된다.
+
+<br>
+
+### 기존 배열에 새로운 element 추가하기
+
+우선 먼저! 기존 배열에 새로운 요소를 추가해주고 싶다면?
+
+```jsx
+const food = ["banana", "apple"]; // 기존 toDos (currentArray)인 것!
+
+// 아래처럼 추가하면
+["peach", food];
+// 결과는 배열 안에 food 배열이 추가되는 것
+// result : ['peach', ['banana', 'apple']]
+```
+
+<br>
+
+제대로 넣어주고 싶다면?
+
+```jsx
+const food = ["banana", "apple"]; // 기존 toDos (currentArray)인 것!
+
+// 아래처럼 추가하면
+["peach", ...food];
+// 결과는 배열 안에 food 배열이 추가되는 것
+// ['peach', 'banana', 'apple']
+```
+
+<br>
+<br>
+
+```jsx
+const [toDo, setToDo] = useState("");
+const [toDos, setToDos] = useState([]);
+
+const onSubmit = (e) => {
+  setToDos((currentArray) => [toDo, ...currentArray]);
+
+  console.log(toDos);
+};
+```
+
+- 기존 Element에 기존 []배열에 추가해주고 싶다면, 새로운 Array를 만들어서 추가해주어야 한다.
+
+- toDo는 우리가 input을 통해 작성해서 등록한 요소이고, 초기에는 아무것도 들어있지 않는 비어있는 Array에 toDo가 더해진 것이다.
+
+- 결국 맨 처음 input 에서 값을 받게 된다면, 빈배열[] 안에 input 으로 처음 받게 된 [toDo] 요소를 추가하게 된다. 그 동작을 반복하는 것이다.
+
+<br>
+
+**setToDos 동작 순서**
+
+```jsx
+// 1. input 에서 abc 를 받음. 현재는 빈 배열임
+setToDos(([]) => ['abc', []]);
+// result : ['abc']
+
+// 2. input 에 두번째 텍스트 입력
+setToDos((['abc']) => ['text', 'abc']);
+// result : ['text', 'abc']
+
+// 3. 위 동작이 input 에 입력될 때마다 반복되는 것임
+```
+
+<br>
+<br>
+
+### map()
+
+map 함수는 array의 모든 item에 대해 실행된다. 그러고 새로운 배열로 반환해준다.
+
+```jsx
+const array = ["a", "b", "c", "d"];
+array.map((item) => item.toUpperCase());
+console.log(array);
+// result : ["A", "B", "C", "D"]
+```
