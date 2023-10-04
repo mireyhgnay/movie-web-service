@@ -174,3 +174,5 @@ console.log(array);
 ```bash
 npm install react-router-dom
 ```
+
+<Switch></Switch> 로 감싸준 이유는 한 번에 하나의 Route(page)만 렌더링 하기 위해서이다.
